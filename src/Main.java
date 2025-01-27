@@ -1,8 +1,9 @@
 public class Main {
 
+    private static final Employee[] employees = new Employee[10];
+
     public static void main(String[] args) {
 
-        Employee[] employees = new Employee[10];
         employees[0] = new Employee("Столярчук Юлия Владимировна", "4", 65000);
         employees[1] = new Employee("Косткин Андрей Александрович", "1", 280000);
         employees[2] = new Employee("Кузьмин Михаил Евгеньевич", "3", 80000);
