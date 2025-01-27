@@ -15,26 +15,26 @@ public class Main {
         employees[8] = new Employee("Зайцева Марина Александровна", "5", 52300);
         employees[9] = new Employee("Карсаков Владимир Иванович", "5", 51000);
 
-        System.out.println(printEmployees(employees));
-        int wageFund = countDefenses(employees);
+        System.out.println(printEmployees());
+        int wageFund = countDefenses();
         System.out.println("Сумма затрат на ЗП в месяц = " + wageFund);
-        System.out.println("Сотрудник с минимальной ЗП = " + minSalaryEmployee(employees));
-        System.out.println("Сотрудник с максимальной ЗП = " + maxSalaryEmployee(employees));
+        System.out.println("Сотрудник с минимальной ЗП = " + minSalaryEmployee());
+        System.out.println("Сотрудник с максимальной ЗП = " + maxSalaryEmployee());
         int middleSalary = employees.length == 0 ? 0 : wageFund / employees.length;
         System.out.println("Среднее значение зарплат = " + middleSalary);
-        printNames(employees);
+        printNames();
 
     }
 
-    public static String printEmployees(Employee[] employeesToPrint) {
+    public static String printEmployees() {
         StringBuilder sb = new StringBuilder();
-        for (Employee employee : employeesToPrint) {
+        for (Employee employee : employees) {
             sb.append(employee.toString()).append("\n");
         }
         return sb.toString();
     }
 
-    public static int countDefenses(Employee[] employees) {
+    public static int countDefenses() {
         int wageFund = 0;
         for (Employee employee : employees) {
             wageFund += employee.getSalary();
@@ -42,7 +42,7 @@ public class Main {
         return wageFund;
     }
 
-    public static String minSalaryEmployee(Employee[] employees) {
+    public static String minSalaryEmployee() {
         int minSalary = Integer.MAX_VALUE;
         int indexOfEmployee = 0;
         for (int i = 0; i < employees.length; i++) {
@@ -54,7 +54,7 @@ public class Main {
         return employees[indexOfEmployee].getFullname();
     }
 
-    public static String maxSalaryEmployee(Employee[] employees) {
+    public static String maxSalaryEmployee() {
         int maxSalary = Integer.MIN_VALUE;
         int indexOfEmployee = 0;
         for (int i = 0; i < employees.length; i++) {
@@ -66,7 +66,7 @@ public class Main {
         return employees[indexOfEmployee].getFullname();
     }
 
-    public static void printNames(Employee[] employees) {
+    public static void printNames() {
         System.out.println();
         for (Employee employee : employees) {
             System.out.println(employee.getFullname());
