@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
 
     private static final Employee[] EMPLOYEES = new Employee[10];
@@ -17,12 +19,50 @@ public class Main {
 
         printEmployees();
         double wageFund = calculateTotalSalary();
+        System.out.println();
         System.out.println("Сумма затрат на ЗП в месяц = " + String.format("%.2f", wageFund));
+        System.out.println();
         System.out.println("Сотрудник с минимальной ЗП = " + minSalaryEmployee());
+        System.out.println();
         System.out.println("Сотрудник с максимальной ЗП = " + maxSalaryEmployee());
         double middleSalary = EMPLOYEES.length == 0 ? 0 : wageFund / EMPLOYEES.length;
+        System.out.println();
         System.out.println("Среднее значение зарплат = " + String.format("%.2f", middleSalary));
         printNames();
+        System.out.println();
+        System.out.println("Повышенная сложность");
+        System.out.println();
+        System.out.println("Индексация ЗП...");
+        increaseSalary(10);
+        printEmployees();
+        System.out.println();
+        System.out.println("Сотрудник с минимальной ЗП в выбранном отделе = " + findEmployeeWithMinSalaryInDepartment("5"));
+        System.out.println();
+        System.out.println("Сотрудник с максимальной ЗП в выбранном отделе = " + findEmployeeWithMaxSalaryInDepartment("5"));
+        System.out.println();
+        System.out.println("Сумма затрат на ЗП в месяц в выбранном отделе = " + String.format("%.2f", calculateTotalSalaryInDepartment("5")));
+        System.out.println();
+        System.out.println("Среднее значение зарплат в выбранном отделе " + String.format("%.2f", calculateMiddleSalaryInDepartment("5")));
+        System.out.println();
+        increaseSalaryInDepartment("5", 10);
+        printEmployeesInDepartment("5");
+        System.out.println();
+        System.out.println("Все сотрудники с актуальными ЗП (после всех индексаций)");
+        printEmployees();
+        Employee[] employeeFound;
+        double salaryCompared = 63283;
+        employeeFound = findEmployeeWithSalaryLessThan(salaryCompared);
+        System.out.println();
+        System.out.println("Сотрудники с ЗП меньше, чем " + salaryCompared);
+        for (Employee employee : employeeFound) {
+            System.out.println(employee.toString(true));
+        }
+        employeeFound = findEmployeeWithSalaryMoreThan(salaryCompared);
+        System.out.println();
+        System.out.println("Сотрудники с ЗП больше или равной " + salaryCompared);
+        for (Employee employee : employeeFound) {
+            System.out.println(employee.toString(true));
+        }
 
     }
 
@@ -67,4 +107,105 @@ public class Main {
             System.out.println(employee.getFullname());
         }
     }
+
+    public static void increaseSalary(double percentageIncrease) {
+        for (int i = 0; i < EMPLOYEES.length; i++) {
+            EMPLOYEES[i].setSalary(EMPLOYEES[i].getSalary() * (1 + percentageIncrease / 100));
+        }
+    }
+
+    public static ArrayList<Employee> findEmployeeInDepartment(String department) {
+        ArrayList<Employee> employeesInDepartment = new ArrayList<Employee>();
+        for (Employee employee : EMPLOYEES) {
+            if (employee.getDepartment().equals(department)) {
+                employeesInDepartment.add(employee);
+            }
+        }
+        System.out.println("Сотрудники отдела " + department + "\n" + employeesInDepartment);
+        return employeesInDepartment;
+    }
+
+    public static Employee findEmployeeWithMinSalaryInDepartment(String department) {
+        ArrayList<Employee> employeesInDepartment = findEmployeeInDepartment(department);
+        Employee minSalaryEmployee = null;
+        for (Employee employee : employeesInDepartment) {
+            if (minSalaryEmployee == null || employee.getSalary() < minSalaryEmployee.getSalary()) {
+                minSalaryEmployee = employee;
+            }
+        }
+        return minSalaryEmployee;
+    }
+
+    public static Employee findEmployeeWithMaxSalaryInDepartment(String department) {
+        ArrayList<Employee> employeesInDepartment = findEmployeeInDepartment(department);
+        Employee maxSalaryEmployee = null;
+        for (Employee employee : employeesInDepartment) {
+            if (maxSalaryEmployee == null || employee.getSalary() > maxSalaryEmployee.getSalary()) {
+                maxSalaryEmployee = employee;
+            }
+        }
+        return maxSalaryEmployee;
+    }
+
+    public static double calculateTotalSalaryInDepartment(String department) {
+        ArrayList<Employee> employeesInDepartment = findEmployeeInDepartment(department);
+        double wageFund = 0;
+        for (Employee employee : employeesInDepartment) {
+            wageFund += employee.getSalary();
+        }
+        return wageFund;
+    }
+
+    public static double calculateMiddleSalaryInDepartment(String department) {
+        ArrayList<Employee> employeesInDepartment = findEmployeeInDepartment(department);
+        double wageFund = 0;
+        for (Employee employee : employeesInDepartment) {
+            wageFund += employee.getSalary();
+        }
+        return employeesInDepartment.isEmpty() ? 0 : wageFund / employeesInDepartment.size();
+    }
+
+    public static void increaseSalaryInDepartment(String department, double percentageIncrease) {
+        ArrayList<Employee> employeesInDepartment = findEmployeeInDepartment(department);
+        for (Employee employee : employeesInDepartment) {
+            employee.setSalary(employee.getSalary() * (1 + percentageIncrease / 100));
+        }
+        System.out.println("Индексация ЗП...");
+    }
+
+    public static void printEmployeesInDepartment(String department) {
+        ArrayList<Employee> employeesInDepartment = findEmployeeInDepartment(department);
+        for (Employee employee : employeesInDepartment) {
+            System.out.println(employee.toString(true));
+        }
+    }
+
+    public static Employee[] findEmployeeWithSalaryLessThan(double salaryCompared) {
+        ArrayList<Employee> employeeWithSalaryLessThanCompared = new ArrayList<Employee>();
+        for (Employee employee : EMPLOYEES) {
+            if (employee.getSalary() < salaryCompared) {
+                employeeWithSalaryLessThanCompared.add(employee);
+            }
+        }
+        Employee[] employeeFound = new Employee[employeeWithSalaryLessThanCompared.size()];
+        for (int i = 0; i < employeeWithSalaryLessThanCompared.size(); i++) {
+            employeeFound[i] = employeeWithSalaryLessThanCompared.get(i);
+        }
+        return employeeFound;
+    }
+
+    public static Employee[] findEmployeeWithSalaryMoreThan(double salaryCompared) {
+        ArrayList<Employee> employeeWithSalaryMoreThanCompared = new ArrayList<Employee>();
+        for (Employee employee : EMPLOYEES) {
+            if (employee.getSalary() >= salaryCompared) {
+                employeeWithSalaryMoreThanCompared.add(employee);
+            }
+        }
+        Employee[] employeeFound = new Employee[employeeWithSalaryMoreThanCompared.size()];
+        for (int i = 0; i < employeeWithSalaryMoreThanCompared.size(); i++) {
+            employeeFound[i] = employeeWithSalaryMoreThanCompared.get(i);
+        }
+        return employeeFound;
+    }
+
 }
