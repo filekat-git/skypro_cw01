@@ -4,11 +4,11 @@ public class Employee {
 
     private String fullname;
     private String department;
-    private int salary;
+    private double salary;
     private static int counter;
     private final int id;
 
-    public Employee(String fullname, String department, int salary) {
+    public Employee(String fullname, String department, double salary) {
         this.fullname = fullname;
         this.department = department;
         this.salary = salary;
@@ -23,7 +23,7 @@ public class Employee {
         return department;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
@@ -41,7 +41,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Сотрудник '" + fullname + " (id " + id + ")'" + ", отдел '" + department + "', зарплата " + salary;
+        return "Сотрудник '" + fullname + " (id " + id + ")'" + ", отдел '" + department + "', зарплата " + String.format("%.2f", salary);
     }
 
     @Override
