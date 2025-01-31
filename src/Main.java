@@ -12,7 +12,7 @@ public class Main {
         EMPLOYEES[2] = new Employee("Кузьмин Михаил Евгеньевич", "3", 80000);
         EMPLOYEES[3] = new Employee("Шестакова Светлана Анатольевна", "2", 140000);
         EMPLOYEES[4] = new Employee("Анисимова Нина Михайловна", "5", 50000);
-        EMPLOYEES[5] = new Employee("Бакунин Максим Дмитреевич", "2", 100000);
+        EMPLOYEES[5] = new Employee("Бакунин Максим Дмитриевич", "2", 100000);
         EMPLOYEES[6] = new Employee("Блохин Андрей Иванович", "3", 90000);
         EMPLOYEES[7] = new Employee("Соболькова Светлана Николаевна", "4", 60000);
         EMPLOYEES[8] = new Employee("Зайцева Марина Александровна", "5", 52300);
