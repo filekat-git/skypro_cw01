@@ -52,13 +52,13 @@ public class Main {
         printEmployees();
         Employee[] employeeFound;
         double salaryCompared = 63283;
-        employeeFound = findEmployeeWithSalaryLessThan(salaryCompared);
+        employeeFound = findEmployeesWithSalaryLessThan(salaryCompared);
         System.out.println();
         System.out.println("Сотрудники с ЗП меньше, чем " + salaryCompared);
         for (Employee employee : employeeFound) {
             System.out.println(employee.toString(true));
         }
-        employeeFound = findEmployeeWithSalaryMoreThan(salaryCompared);
+        employeeFound = findEmployeesWithSalaryMoreThan(salaryCompared);
         System.out.println();
         System.out.println("Сотрудники с ЗП больше или равной " + salaryCompared);
         for (Employee employee : employeeFound) {
@@ -115,8 +115,8 @@ public class Main {
         }
     }
 
-    public static List findEmployeeInDepartment(String department) {
-        List employeesInDepartment = new ArrayList();
+    public static List<Employee> findEmployeeInDepartment(String department) {
+        List<Employee> employeesInDepartment = new ArrayList<>();
         for (Employee employee : EMPLOYEES) {
             if (employee.getDepartment().equals(department)) {
                 employeesInDepartment.add(employee);
@@ -178,15 +178,14 @@ public class Main {
     }
 
     public static void printEmployeesInDepartment(String department) {
-        List employeesInDepartment = findEmployeeInDepartment(department);
-        for (Object o : employeesInDepartment) {
-            Employee emp = (Employee) o;
-            System.out.println(emp.toString(true));
+        List<Employee> employeesInDepartment = findEmployeeInDepartment(department);
+        for (Employee employee : employeesInDepartment) {
+            System.out.println(employee.toString(true));
         }
     }
 
-    public static Employee[] findEmployeeWithSalaryLessThan(double salaryCompared) {
-        List employeeWithSalaryLessThanCompared = new ArrayList();
+    public static Employee[] findEmployeesWithSalaryLessThan(double salaryCompared) {
+        List<Employee> employeeWithSalaryLessThanCompared = new ArrayList<>();
         for (Employee employee : EMPLOYEES) {
             if (employee.getSalary() < salaryCompared) {
                 employeeWithSalaryLessThanCompared.add(employee);
@@ -194,13 +193,13 @@ public class Main {
         }
         Employee[] employeeFound = new Employee[employeeWithSalaryLessThanCompared.size()];
         for (int i = 0; i < employeeWithSalaryLessThanCompared.size(); i++) {
-            employeeFound[i] = (Employee) employeeWithSalaryLessThanCompared.get(i);
+            employeeFound[i] = employeeWithSalaryLessThanCompared.get(i);
         }
         return employeeFound;
     }
 
-    public static Employee[] findEmployeeWithSalaryMoreThan(double salaryCompared) {
-        List employeeWithSalaryMoreThanCompared = new ArrayList<Employee>();
+    public static Employee[] findEmployeesWithSalaryMoreThan(double salaryCompared) {
+        List<Employee> employeeWithSalaryMoreThanCompared = new ArrayList<>();
         for (Employee employee : EMPLOYEES) {
             if (employee.getSalary() >= salaryCompared) {
                 employeeWithSalaryMoreThanCompared.add(employee);
@@ -208,7 +207,7 @@ public class Main {
         }
         Employee[] employeeFound = new Employee[employeeWithSalaryMoreThanCompared.size()];
         for (int i = 0; i < employeeWithSalaryMoreThanCompared.size(); i++) {
-            employeeFound[i] = (Employee) employeeWithSalaryMoreThanCompared.get(i);
+            employeeFound[i] = employeeWithSalaryMoreThanCompared.get(i);
         }
         return employeeFound;
     }
