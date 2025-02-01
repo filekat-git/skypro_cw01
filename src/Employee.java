@@ -35,13 +35,22 @@ public class Employee {
         this.department = department;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
     @Override
     public String toString() {
         return "Сотрудник '" + fullname + " (id " + id + ")'" + ", отдел '" + department + "', зарплата " + String.format("%.2f", salary);
+    }
+
+    public String toString(boolean exceptDepartment) {
+        if (exceptDepartment) {
+            return "Сотрудник '" + fullname + " (id " + id + ")'" + ", зарплата " + String.format("%.2f", salary);
+        } else {
+            return this.toString();
+        }
+
     }
 
     @Override
