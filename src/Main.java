@@ -37,10 +37,16 @@ public class Main {
         increaseSalary(10);
         printEmployees();
         System.out.println();
-        System.out.println("Сотрудник с минимальной ЗП в выбранном отделе = " + findEmployeeWithMinSalaryInDepartment("5"));
-        System.out.println();
-        System.out.println("Сотрудник с максимальной ЗП в выбранном отделе = " + findEmployeeWithMaxSalaryInDepartment("5"));
-        System.out.println();
+        Employee employeeWithMinSalaryInDepartment = findEmployeeWithMinSalaryInDepartment(null);
+        if (employeeWithMinSalaryInDepartment != null) {
+            System.out.println("Сотрудник с минимальной ЗП в выбранном отделе = " + employeeWithMinSalaryInDepartment);
+            System.out.println();
+        }
+        Employee employeeWithMaxSalaryInDepartment = findEmployeeWithMaxSalaryInDepartment("5");
+        if (employeeWithMaxSalaryInDepartment != null) {
+            System.out.println("Сотрудник с максимальной ЗП в выбранном отделе = " + employeeWithMaxSalaryInDepartment);
+            System.out.println();
+        }
         System.out.println("Сумма затрат на ЗП в месяц в выбранном отделе = " + String.format("%.2f", calculateTotalSalaryInDepartment("5")));
         System.out.println();
         System.out.println("Среднее значение зарплат в выбранном отделе " + String.format("%.2f", calculateMiddleSalaryInDepartment("5")));
@@ -117,40 +123,56 @@ public class Main {
 
     public static List<Employee> findEmployeeInDepartment(String department) {
         List<Employee> employeesInDepartment = new ArrayList<>();
-        for (Employee employee : EMPLOYEES) {
-            if (employee.getDepartment().equals(department)) {
-                employeesInDepartment.add(employee);
+        if (department != null) {
+            for (Employee employee : EMPLOYEES) {
+                if (employee.getDepartment().equals(department)) {
+                    employeesInDepartment.add(employee);
+                }
             }
+        } else {
+            System.out.println("Неверно задан отдел (findEmployeeInDepartment)");
         }
         return employeesInDepartment;
     }
 
     public static Employee findEmployeeWithMinSalaryInDepartment(String department) {
         Employee minSalaryEmployee = null;
-        for (Employee employee : EMPLOYEES) {
-            if (employee.getDepartment().equals(department) && (minSalaryEmployee == null || employee.getSalary() < minSalaryEmployee.getSalary())) {
-                minSalaryEmployee = employee;
+        if (department != null) {
+            for (Employee employee : EMPLOYEES) {
+                if (employee.getDepartment().equals(department) && (minSalaryEmployee == null || employee.getSalary() < minSalaryEmployee.getSalary())) {
+                    minSalaryEmployee = employee;
+                }
             }
+        } else {
+            System.out.println("Неверно задан отдел (findEmployeeWithMinSalaryInDepartment)");
         }
         return minSalaryEmployee;
     }
 
     public static Employee findEmployeeWithMaxSalaryInDepartment(String department) {
         Employee maxSalaryEmployee = null;
-        for (Employee employee : EMPLOYEES) {
-            if (employee.getDepartment().equals(department) && (maxSalaryEmployee == null || employee.getSalary() > maxSalaryEmployee.getSalary())) {
-                maxSalaryEmployee = employee;
+        if (department != null) {
+            for (Employee employee : EMPLOYEES) {
+                if (employee.getDepartment().equals(department) && (maxSalaryEmployee == null || employee.getSalary() > maxSalaryEmployee.getSalary())) {
+                    maxSalaryEmployee = employee;
+                }
             }
+        } else {
+            System.out.println("Неверно задан отдел (findEmployeeWithMaxSalaryInDepartment)");
         }
         return maxSalaryEmployee;
     }
 
     public static double calculateTotalSalaryInDepartment(String department) {
         double wageFund = 0;
-        for (Employee employee : EMPLOYEES) {
-            if (employee.getDepartment().equals(department)) {
-                wageFund += employee.getSalary();
+        if (department != null) {
+            for (Employee employee : EMPLOYEES) {
+                if (employee.getDepartment().equals(department)) {
+                    wageFund += employee.getSalary();
+                }
             }
+        } else {
+            System.out.println("Неверно задан отдел (calculateTotalSalaryInDepartment)");
         }
         return wageFund;
     }
@@ -158,29 +180,40 @@ public class Main {
     public static double calculateMiddleSalaryInDepartment(String department) {
         double wageFund = 0;
         int numberOfEmployees = 0;
-        for (Employee employee : EMPLOYEES) {
-            if (employee.getDepartment().equals(department)) {
-                wageFund += employee.getSalary();
-                numberOfEmployees++;
+        if (department != null) {
+            for (Employee employee : EMPLOYEES) {
+                if (employee.getDepartment().equals(department)) {
+                    wageFund += employee.getSalary();
+                    numberOfEmployees++;
+                }
             }
-
+        } else {
+            System.out.println("Неверно задан отдел (calculateMiddleSalaryInDepartment)");
         }
         return numberOfEmployees == 0 ? 0 : wageFund / numberOfEmployees;
     }
 
     public static void increaseSalaryInDepartment(String department, double percentageIncrease) {
-        for (Employee employee : EMPLOYEES) {
-            if (employee.getDepartment().equals(department)) {
-                employee.setSalary(employee.getSalary() * (1 + percentageIncrease / 100));
+        if (department != null) {
+            for (Employee employee : EMPLOYEES) {
+                if (employee.getDepartment().equals(department)) {
+                    employee.setSalary(employee.getSalary() * (1 + percentageIncrease / 100));
+                }
             }
+            System.out.println("Индексация ЗП...");
+        } else {
+            System.out.println("Неверно задан отдел (increaseSalaryInDepartment)");
         }
-        System.out.println("Индексация ЗП...");
     }
 
     public static void printEmployeesInDepartment(String department) {
-        List<Employee> employeesInDepartment = findEmployeeInDepartment(department);
-        for (Employee employee : employeesInDepartment) {
-            System.out.println(employee.toString(true));
+        if (department != null) {
+            List<Employee> employeesInDepartment = findEmployeeInDepartment(department);
+            for (Employee employee : employeesInDepartment) {
+                System.out.println(employee.toString(true));
+            }
+        } else {
+            System.out.println("Неверно задан отдел (printEmployeesInDepartment)");
         }
     }
 
