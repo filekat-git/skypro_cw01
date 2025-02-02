@@ -2,17 +2,88 @@ public class Main {
 
     public static void main(String[] args) {
 
-        EmployeeBook empBook = new EmployeeBook(10);
-        empBook.addEmployee("Столярчук Юлия Владимировна", "4", 65000);
-        empBook.addEmployee("Косткин Андрей Александрович", "1", 280000);
-        empBook.addEmployee("Кузьмин Михаил Евгеньевич", "3", 80000);
-        empBook.addEmployee("Шестакова Светлана Анатольевна", "2", 140000);
-        empBook.addEmployee("Анисимова Нина Михайловна", "5", 50000);
-        empBook.addEmployee("Бакунин Максим Дмитриевич", "2", 100000);
-        empBook.addEmployee("Блохин Андрей Иванович", "3", 90000);
-        empBook.addEmployee("Соболькова Светлана Николаевна", "4", 60000);
-        empBook.addEmployee("Зайцева Марина Александровна", "5", 52300);
-        empBook.addEmployee("Карсаков Владимир Иванович", "5", 51000);
+        int capacity = 10;
+        EmployeeBook empBook = new EmployeeBook(capacity);
+        if (empBook.addEmployee("Столярчук Юлия Владимировна", "4", 65000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Косткин Андрей Александрович", "1", 280000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Кузьмин Михаил Евгеньевич", "3", 80000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Шестакова Светлана Анатольевна", "2", 140000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Анисимова Нина Михайловна", "5", 50000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Бакунин Максим Дмитриевич", "2", 100000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Блохин Андрей Иванович", "3", 90000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Соболькова Светлана Николаевна", "4", 60000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Зайцева Марина Александровна", "5", 52300)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+        if (empBook.addEmployee("Карсаков Владимир Иванович", "5", 51000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+
+        System.out.println();
+        if (empBook.removeEmployee(4)) {
+            System.out.println("Сотрудник удален");
+        } else {
+            System.out.println("Сотрудник с указанным id не найден");
+        }
+        if (empBook.removeEmployee(8)) {
+            System.out.println("Сотрудник удален");
+        } else {
+            System.out.println("Сотрудник с указанным id не найден");
+        }
+        if (empBook.removeEmployee(5)) {
+            System.out.println("Сотрудник удален");
+        } else {
+            System.out.println("Сотрудник с указанным id не найден");
+        }
+
+        System.out.println();
+        empBook.printBook();
+
+        System.out.println();
+        if (empBook.addEmployee("Копейкина Мария Сергеевна", "2", 135000)) {
+            System.out.println("Добавлен новый сотрудник");
+        } else {
+            System.out.println("Нет места для добавления нового сотрудника");
+        }
+
+        System.out.println();
+        empBook.printBook();
 
         double wageFund = empBook.calculateTotalSalary();
         int actualSize = empBook.getActualSize();
@@ -71,6 +142,9 @@ public class Main {
         for (Employee employee : employeeFound) {
             System.out.println(employee.toString(true));
         }
+
+        System.out.println();
+        System.out.println("Еще можно добавить сотрудников: " + (capacity - empBook.getActualSize()));
 
     }
 
