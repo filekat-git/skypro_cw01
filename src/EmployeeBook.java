@@ -19,7 +19,7 @@ public class EmployeeBook {
         return false;
     }
 
-    private Employee findEmployeeByID(int id) {
+    public Employee findEmployeeByID(int id) {
         for (int i = 0; i < EMPLOYEES.length; i++) {
             if (EMPLOYEES[i] != null && EMPLOYEES[i].getId() == id) {
                 return EMPLOYEES[i];
@@ -29,13 +29,10 @@ public class EmployeeBook {
     }
 
     public boolean removeEmployee(int id) {
-        Employee employeeToRemove = findEmployeeByID(id);
-        if (employeeToRemove != null) {
-            for (int i = 0; i < EMPLOYEES.length; i++) {
-                if (EMPLOYEES[i] != null && EMPLOYEES[i].equals(employeeToRemove)) {
-                    EMPLOYEES[i] = null;
-                    return true;
-                }
+        for (int i = 0; i < EMPLOYEES.length; i++) {
+            if (EMPLOYEES[i] != null && EMPLOYEES[i].getId() == id) {
+                EMPLOYEES[i] = null;
+                return true;
             }
         }
         return false;
@@ -53,7 +50,9 @@ public class EmployeeBook {
 
     public void printBook() {
         for (int i = 0; i < EMPLOYEES.length; i++) {
-            System.out.println(EMPLOYEES[i]);
+            if (EMPLOYEES[i] != null) {
+                System.out.println(EMPLOYEES[i]);
+            }
         }
     }
 

@@ -89,13 +89,15 @@ public class Main {
         int actualSize = empBook.getActualSize();
         double middleSalary = actualSize == 0 ? 0 : wageFund / actualSize;
         double salaryCompared = 63283;
+        Employee[] employeesFound;
+        Employee employeeFound;
 
         System.out.println();
         empBook.printBook();
 
         System.out.println();
         System.out.println("Сумма затрат на ЗП в месяц = " + String.format("%.2f", wageFund));
-        
+
         System.out.println();
         System.out.println("Сотрудник с минимальной ЗП = " + empBook.minSalaryEmployee());
         System.out.println();
@@ -124,23 +126,31 @@ public class Main {
         System.out.println("Среднее значение зарплат в выбранном отделе " + String.format("%.2f", empBook.calculateMiddleSalaryInDepartment("5")));
         System.out.println();
         empBook.increaseSalaryInDepartment("5", 10);
+        System.out.println();
         empBook.printEmployeesInDepartment("5");
         System.out.println();
         System.out.println("Все сотрудники с актуальными ЗП (после всех индексаций)");
         empBook.printBook();
-        Employee[] employeeFound;
 
-        employeeFound = empBook.findEmployeesWithSalaryLessThan(salaryCompared);
+        employeesFound = empBook.findEmployeesWithSalaryLessThan(salaryCompared);
         System.out.println();
         System.out.println("Сотрудники с ЗП меньше, чем " + salaryCompared);
-        for (Employee employee : employeeFound) {
+        for (Employee employee : employeesFound) {
             System.out.println(employee.toString(true));
         }
-        employeeFound = empBook.findEmployeesWithSalaryMoreThan(salaryCompared);
+        employeesFound = empBook.findEmployeesWithSalaryMoreThan(salaryCompared);
         System.out.println();
         System.out.println("Сотрудники с ЗП больше или равной " + salaryCompared);
-        for (Employee employee : employeeFound) {
+        for (Employee employee : employeesFound) {
             System.out.println(employee.toString(true));
+        }
+
+        System.out.println();
+        employeeFound = empBook.findEmployeeByID(12);
+        if (employeeFound != null) {
+            System.out.println(employeeFound);
+        } else {
+            System.out.println("Сотрудник не найден");
         }
 
         System.out.println();
